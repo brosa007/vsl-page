@@ -35,11 +35,14 @@ export async function fetchData(): Promise<ApiData | null> {
     return null;
   }
 }
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function submitPurchase(data: any) {
+export async function submitPurchase(
+  product_id: number,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any
+) {
   try {
     const response = await fetch(
-      "https://api-candidate.ogruposix.com/purchase",
+      `https://api-candidate.ogruposix.com/buy/${product_id}`,
       {
         method: "POST",
         headers: {
@@ -48,8 +51,11 @@ export async function submitPurchase(data: any) {
         body: JSON.stringify(data),
       }
     );
-    if (!response.ok)
+
+    if (!response.ok) {
       throw new Error("Erro ao enviar os dados.");
+    }
+
     alert("Compra realizada com sucesso!");
   } catch (error) {
     console.error("Erro na compra:", error);

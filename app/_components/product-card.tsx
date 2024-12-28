@@ -16,7 +16,7 @@ export default function ProductCard({
   const handleSubmit = async (data: any) => {
     try {
       console.log("Dados enviados:", data);
-      await submitPurchase(data);
+      await submitPurchase(product.product_id, data);
       alert("Compra realizada com sucesso!");
       router.push("/obrigado");
     } catch (error) {
